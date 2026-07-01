@@ -1,0 +1,5 @@
+pydantic-ai>=2.0.0
+python-dotenv>=1.0.0
+google-genai>=1.0.0
+fastmcp>=2.0.0
+mcp-server-fetch>=2025.0.0
