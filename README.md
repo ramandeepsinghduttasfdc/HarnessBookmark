@@ -1,4 +1,4 @@
-# Bookmark Agent (Isolated Project)
+# Bookmark Agent
 
 This folder contains a standalone terminal-based PydanticAI agent that uses:
 - Model: `google:gemini-2.5-flash`
@@ -17,21 +17,19 @@ It reads and writes the configured Chrome profile bookmarks file.
 - `tools/bookmark_reader.py`: list/search bookmark tool
 - `tools/bookmark_writer.py`: create bookmark tool
 - `requirements.txt`: isolated dependencies for this folder
-- `.env.example`: required env var template
+- `env.example`: required env var template
 
 ## Setup
 
-1. Create and activate a Python virtual environment from this `Bookmark` folder.
+1. Create and activate a Python virtual environment from this Repo folder
 2. Install dependencies:
    - `pip install -r requirements.txt`
-3. Create `.env` from `.env.example` and set `GOOGLE_API_KEY` & `CHROME_PROFILE_NAME`
+3. Create `.env` from `env.example` and set `GOOGLE_API_KEY` & `CHROME_PROFILE_NAME`
 4. Optional profile/path overrides:
   - `CHROME_PROFILE_NAME` (example: `Default`, `Profile 1`, `Profile 2`)
   - `CHROME_USER_DATA_DIR` (absolute path to Chrome user data directory)
 
 ## Run
-
-From the `Bookmark` folder:
 
 ```bash
 python -m app.main
@@ -56,7 +54,7 @@ The agent is instructed to ask for confirmation before calling the create-bookma
 - Risk: Chrome may overwrite or reorder bookmark changes while still running, so immediate consistency is not guaranteed.
 - Bookmark creation requires a valid destination folder path. If folder is missing or invalid, the tool returns guidance and suggests listing available folder structures.
 - On write, a timestamped backup is created before atomically replacing the bookmarks file.
-- Default target profile is `Profile 1` unless overridden via `CHROME_PROFILE_NAME`.
+- If `CHROME_PROFILE_NAME` is not specified in .env file, then "Default" will be automatically used
 - Path resolution is OS-aware (macOS, Linux, Windows). Use `CHROME_USER_DATA_DIR` if your Chrome data is in a custom location.
 - Another security net could be added using Pydantic AI's logfire feature. This helps to record each converation and technical to/fro, hence Agents behaviour and its scrutiny can be done. This is, however not done in this exercise but could be a useful feature.
 Environment secrets are handled in .env file (environment file) which by design cannot get commited in git (.gitignore)
